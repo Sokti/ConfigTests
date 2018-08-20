@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Configurations>Debug_Dev;Release_Dev;Debug_Store;Release_Store</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Dev\text.txt" Condition="!$(Configuration.EndsWith('_Dev'))" />
+    <None Remove="Store\text.txt" Condition="!$(Configuration.EndsWith('_Store'))" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Dev\text.txt" Condition="$(Configuration.EndsWith('_Dev'))" LogicalName="test.txt" />
+    <EmbeddedResource Include="Store\text.txt" Condition="$(Configuration.EndsWith('_Store'))" />
+  </ItemGroup>
+
+
+</Project>
